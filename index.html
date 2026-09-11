@@ -352,7 +352,7 @@ footer.note a{color:var(--cyan);}
 <header class="hero">
   <p class="eyebrow"># cátedra_programación_1 / asistente virtual</p>
   <h1>Prog<span class="amp">IA</span></h1>
-  <p>Escribí tu consulta o usá los accesos rápidos.</p>
+  <p>Preguntame por el cronograma, el contrato didáctico, las unidades, los encuentros virtuales, el plantel docente o el programa de la materia. Escribí tu consulta o usá los accesos rápidos.</p>
 </header>
 
 <main>
@@ -387,6 +387,8 @@ const ARCHIVOS_BASE = [
   // Agregá o quitá nombres de archivo acá, por ejemplo:
   // 'docentes.txt',
   // 'encuentros_virtuales.pdf',
+  // IMPORTANTE: el nombre tiene que ser IDÉNTICO (mayúsculas,
+  // tildes, guiones bajos) al del archivo subido al repositorio.
 ];
 
 // Ruta base de archivos: '' = misma carpeta que index.html.
@@ -516,14 +518,26 @@ async function extraerTextoPDF(arrayBuffer){
 }
 
 async function cargarArchivo(nombre){
-  const url = RUTA_BASE + nombre;
-  const resp = await fetch(url);
+  // encodeURI respeta '/' pero codifica espacios, tildes, ñ, etc.,
+  // para que el fetch funcione sin importar cómo el navegador
+  // normalice el nombre del archivo.
+  const url = encodeURI(RUTA_BASE + nombre);
+  let resp;
+  try{
+    resp = await fetch(url, { cache: 'no-store' });
+  } catch (errRed){
+    throw new Error(`Error de red al pedir "${nombre}": ${errRed.message}`);
+  }
   if (!resp.ok){
-    throw new Error(`No se pudo descargar ${nombre} (HTTP ${resp.status})`);
+    throw new Error(`"${nombre}" respondió HTTP ${resp.status} (${resp.status === 404 ? 'no se encontró el archivo con ese nombre exacto en el repositorio' : 'ver detalle en la consola'})`);
   }
   if (nombre.toLowerCase().endsWith('.pdf')){
     const buffer = await resp.arrayBuffer();
-    return await extraerTextoPDF(buffer);
+    try{
+      return await extraerTextoPDF(buffer);
+    } catch (errPdf){
+      throw new Error(`No se pudo leer el PDF "${nombre}": ${errPdf.message}`);
+    }
   } else {
     return await resp.text();
   }
@@ -553,7 +567,7 @@ async function inicializarBaseDeConocimiento(){
     ARCHIVOS_BASE.map(nombre => cargarArchivo(nombre))
   );
 
-  const fallidos = [];
+  const fallidos = []; // { nombre, motivo }
   resultados.forEach((res, idx) => {
     const nombre = ARCHIVOS_BASE[idx];
     if (res.status === 'fulfilled' && res.value && res.value.trim().length > 0){
@@ -562,7 +576,11 @@ async function inicializarBaseDeConocimiento(){
         INDICE.push({ archivo: nombre, texto: frag });
       });
     } else {
-      fallidos.push(nombre);
+      const motivo = res.status === 'rejected'
+        ? res.reason.message
+        : 'el archivo se descargó pero no se pudo extraer texto (¿está vacío o es una imagen escaneada sin texto?)';
+      fallidos.push({ nombre, motivo });
+      console.error('ProgIA - error cargando', nombre, motivo);
     }
   });
 
@@ -570,17 +588,19 @@ async function inicializarBaseDeConocimiento(){
 
   if (INDICE.length === 0){
     actualizarEstado('No se pudo cargar la base de conocimiento', 'error');
+    const detalle = fallidos.map(f => `• ${f.nombre} → ${f.motivo}`).join('\n');
     agregarMensaje('bot',
-      'No pude cargar los documentos de la cátedra (' + ARCHIVOS_BASE.join(', ') +
-      '). Verificá que los archivos estén en el mismo repositorio que este sitio y que los nombres coincidan exactamente con los configurados. Mientras tanto, comunicate por el canal oficial de la cátedra para tus consultas.');
+      'No pude cargar ningún documento de la cátedra. Detalle por archivo:\n\n' + detalle +
+      '\n\nRevisá que cada archivo esté subido en la MISMA carpeta que este index.html, con el nombre exactamente igual (mayúsculas, tildes y guiones bajos incluidos) al configurado en ARCHIVOS_BASE. Mientras tanto, comunicate por el canal oficial de la cátedra para tus consultas.');
     return;
   }
 
   if (fallidos.length > 0){
     actualizarEstado('Base de conocimiento lista (con avisos)', 'ready');
+    const detalle = fallidos.map(f => `• ${f.nombre} → ${f.motivo}`).join('\n');
     agregarMensaje('bot',
-      '¡Hola! Soy ProgIA 👋 Ya cargué parte de la base de conocimiento de la cátedra, pero no pude leer: ' +
-      fallidos.join(', ') + '. Puedo igualmente ayudarte con la información de los demás documentos. Elegí una opción del menú o escribí tu consulta.');
+      '¡Hola! Soy ProgIA 👋 Ya cargué parte de la base de conocimiento de la cátedra, pero tuve problemas con:\n\n' + detalle +
+      '\n\nPuedo igualmente ayudarte con la información de los demás documentos. Elegí una opción del menú o escribí tu consulta.');
   } else {
     actualizarEstado('Base de conocimiento lista', 'ready');
     agregarMensaje('bot',
@@ -668,9 +688,10 @@ function buscarEnBase(consulta){
 // Nombres "lindos" para mostrar la fuente en vez del nombre de archivo crudo.
 function nombreLegible(archivo){
   const mapa = {
-    'cronograma.pdf': 'Cronograma',
-    'contrato_didactico.pdf': 'Contrato Didáctico',
-    'programa.pdf': 'Programa de la Materia'
+    'Cronograma_2C_2026.pdf': 'Cronograma 2C 2026',
+    'Guía_de_Cursada.pdf': 'Guía de Cursada',
+    'Equipo_Docente.pdf': 'Equipo Docente',
+    'Link_Zoom.pdf': 'Link de Zoom'
   };
   return mapa[archivo] || archivo.replace(/\.[^.]+$/, '').replace(/_/g, ' ');
 }
