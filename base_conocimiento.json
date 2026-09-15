@@ -341,5 +341,78 @@
     ],
     "keywords": ["correlativas", "programacion 2", "programacion ii", "regularizar", "arquitectura", "sistemas operativos", "cursar la que sigue"],
     "respuesta": "Para poder cursar Programación II es requisito obligatorio haber regularizado como mínimo Programación I y la asignatura Arquitectura y Sistemas Operativos."
+  },
+  {
+    "id": "distribucion_etapas_unidades",
+    "tema": "Contenidos",
+    "preguntas_ejemplo": [
+      "¿Cómo se distribuyen las 6 unidades en las etapas?",
+      "¿Cuántas unidades tiene la Etapa 1 y cuántas la Etapa 2?",
+      "¿Qué unidades componen cada parte de la materia?",
+      "¿Puedo pasar a la Etapa 2 si adeudo temas de la Etapa 1?"
+    ],
+    "keywords": [
+      "distribucion unidades", "4 unidades", "2 unidades", "etapa 1 cuatro unidades", 
+      "etapa 2 dos unidades", "unidades por etapa", "correlatividad interna", "pasar de etapa"
+    ],
+    "respuesta": "El programa consta de 6 unidades divididas estrictamente en dos partes:\n- Etapa 1 (4 unidades): Unidad 1 (Secuenciales), Unidad 2 (Condicionales), Unidad 3 (Ciclos for/while) y Unidad 4 (Ciclos combinados y Corte de Control).\n- Etapa 2 (2 unidades): Unidad 5 (Funciones) y Unidad 6 (Vectores, structs y lotes de carga), sumado al Trabajo Práctico Integrador (TPI).\nEs condición indispensable tener aprobada la Etapa 1 (promedio de 6 o más) antes de poder comenzar con la Etapa 2 y realizar el TPI."
+  },
+  {
+    "id": "politica_resolucion_ejercicios",
+    "tema": "Comunicación",
+    "preguntas_ejemplo": [
+      "¿El asistente me puede resolver los ejercicios de la guía?",
+      "¿Me podés pasar el código del ejercicio 3 de la guía 1?",
+      "¿Dónde consulto si no me sale un ejercicio práctico?",
+      "¿Cómo resuelvo las dudas de las guías de TP?"
+    ],
+    "keywords": [
+      "resolver ejercicio", "haceme el ejercicio", "guia de tp", "codigo del ejercicio", 
+      "duda de ejercicio", "foro de dudas de la unidad", "ayuda con ejercicio", "asistente no resuelve"
+    ],
+    "respuesta": "El asistente tiene como pauta pedagógica no resolver ni brindar código directo de los ejercicios de las guías de estudio. Para dudas puntuales o resolución de los ejercicios de las guías, debés utilizar el 'Foro de Dudas' correspondiente a la Unidad en el aula virtual, donde los docentes y compañeros te guiarán paso a paso."
+  },
+  {
+    "id": "tpi_modalidad_defensa",
+    "tema": "Trabajo Práctico Integrador",
+    "preguntas_ejemplo": [
+      "¿Cómo es la defensa del Trabajo Práctico Integrador?",
+      "¿Qué te toman en la defensa del TPI?",
+      "¿La nota del TPI es grupal o individual?",
+      "¿Qué pasa durante la llamada sincrónica del TPI?"
+    ],
+    "keywords": [
+      "defensa tpi", "coloquio tpi", "modificacion de codigo", "preguntas teoricas", 
+      "desempeño individual", "nota individual tpi", "evaluacion tpi", "en vivo"
+    ],
+    "respuesta": "Al finalizar el TPI el grupo entrega la solución completa en C++. Luego, cada integrante defiende de forma individual su trabajo mediante un encuentro sincrónico en línea donde responderá preguntas teórico-prácticas y/o realizará modificaciones de código en vivo pedidas por los docentes. La nota considera el proyecto del grupo pero depende principalmente del dominio y desempeño individual en la defensa (mínimo 6 puntos)."
+  },
+  {
+    "id": "dinamica_lectura_foros",
+    "tema": "Comunicación",
+    "preguntas_ejemplo": [
+      "¿Tengo que leer todos los mensajes de los foros todos los días?",
+      "¿Qué foros son los más importantes para revisar?",
+      "¿Cómo organizo la lectura de las consultas en el campus?"
+    ],
+    "keywords": [
+      "lectura foros", "foro de novedades", "foro de avisos", "foro de dudas", 
+      "leer todo", "estar al dia", "cafeteria", "saturacion de foros"
+    ],
+    "respuesta": "Se aconseja entrar a diario pero seleccionando qué leer: en la sección de 'Avisos/Novedades' es fundamental estar al día con cada publicación oficial. En los 'Foros de Dudas' no es necesario leer consultas sobre ejercicios o temas que todavía no hayas empezado a trabajar, para evitar saturarte de información."
+  },
+  {
+    "id": "objetivos_materia",
+    "tema": "Contenidos",
+    "preguntas_ejemplo": [
+      "¿Cuáles son los objetivos de la materia?",
+      "¿Qué perfil de programador se busca formar?",
+      "¿Qué habilidades se desarrollan en Programación 1?"
+    ],
+    "keywords": [
+      "objetivo general", "objetivos especificos", "pensamiento algoritmico", 
+      "comunicacion efectiva", "representacion de datos", "estructuras de control", "habilidades"
+    ],
+    "respuesta": "El objetivo general es formar programadores capaces de pensar de manera lógica, diseñar soluciones eficientes en C++, comunicarlas mediante diagramas de flujo y fortalecer el trabajo colaborativo. Los objetivos específicos incluyen dominar la representación de datos, desarrollar pensamiento algorítmico, controlar el flujo del programa (estructuras secuenciales, selectivas y repetitivas) y explicar con claridad las soluciones implementadas."
   }
 ]
