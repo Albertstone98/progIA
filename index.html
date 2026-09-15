@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrograBOT — Asistente de Programación 1</title>
+<title>MaxiBOT — Asistente de Programación 1</title>
 
 <!-- Fuse.js para búsqueda difusa (fuzzy search) liviana y veloz -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
@@ -488,7 +488,7 @@ footer.note {
 
 <div class="titlebar">
   <div class="dots"><span></span><span></span><span></span></div>
-  <div class="filetab">prograBOT<b>.cpp</b></div>
+  <div class="filetab">maxiBOT<b>.cpp</b></div>
   <div class="status-pill" id="statusPill" role="status" aria-live="polite">
     <span class="status-dot" id="statusDot"></span>
     <span id="statusText">Cargando base…</span>
@@ -497,7 +497,7 @@ footer.note {
 
 <header class="hero">
   <p class="eyebrow"># cátedra_programación_1 / asistente virtual</p>
-  <h1>Progra<span class="amp">BOT</span></h1>
+  <h1>Maxi<span class="amp">BOT</span></h1>
   <p>Preguntame sobre pautas, fechas, TPI o cursada. Usá los accesos rápidos.</p>
 </header>
 
@@ -514,7 +514,7 @@ footer.note {
   </div>
 </main>
 
-<footer class="note">// PrograBOT responde en base al material oficial de Programación 1.</footer>
+<footer class="note">// MaxiBOT responde en base al material oficial de Programación 1.</footer>
 
 <script>
 /* =====================================================
@@ -631,7 +631,7 @@ function agregarMensaje(rol, textoPlano){
 
   const who = document.createElement('div');
   who.className = 'who';
-  who.textContent = rol === 'bot' ? 'PrograBOT' : 'Vos';
+  who.textContent = rol === 'bot' ? 'MaxiBOT' : 'Vos';
 
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
@@ -663,7 +663,7 @@ function mostrarEscribiendo(){
   const wrap = document.createElement('div');
   wrap.className = 'msg bot';
   wrap.id = 'typingIndicator';
-  wrap.innerHTML = `<div class="who">PrograBOT</div>
+  wrap.innerHTML = `<div class="who">MaxiBOT</div>
     <div class="bubble"><span class="typing"><span></span><span></span><span></span></span></div>`;
   chatlog.appendChild(wrap);
   chatlog.scrollTop = chatlog.scrollHeight;
@@ -723,10 +723,10 @@ async function inicializarBase(){
     CARGA_COMPLETA = true;
 
     actualizarEstado('Base lista', 'ready');
-    agregarMensaje('bot', '¡Hola! Soy PrograBOT, el asistente virtual de Programación 1 🧑‍💻 Preguntame sobre pautas, fechas o usá los accesos rápidos.');
+    agregarMensaje('bot', '¡Hola! Soy MaxiBOT, el asistente virtual de Programación 1 🧑‍💻 Preguntame sobre pautas, fechas o usá los accesos rápidos.');
 
   } catch (error){
-    console.error("PrograBOT - Error cargando JSON:", error);
+    console.error("MaxiBOT - Error cargando JSON:", error);
     actualizarEstado('Error al cargar', 'error');
     agregarMensaje('bot', 'Hubo un inconveniente al cargar `base_conocimiento.json`. Verificá que el archivo esté subido en GitHub Pages.');
   }
