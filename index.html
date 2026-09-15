@@ -5,18 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProgIA — Asistente de Programación 1</title>
 
-<!-- PDF.js (Mozilla) vía CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- Fuse.js para búsqueda difusa (fuzzy search) liviana y veloz -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
 
 <style>
-
 /* =====================================================
-   TOKENS
-   Paleta: panel de editor (carbón azulado) + acento
-   ámbar (resalte de "definición") + acento cian
-   (resalte de "variable/usuario"). Tipografía: JetBrains
-   Mono para rótulos y estructura de tipo IDE, Inter para
-   el cuerpo del texto (legibilidad en párrafos largos).
+   TOKENS & TIPOGRAFÍA
    ===================================================== */
 :root{
   --bg-0:#0e1117;
@@ -52,7 +46,7 @@ body{
   min-height:100vh;
 }
 
-/* ---------- barra superior tipo "editor" ---------- */
+/* Barra superior */
 .titlebar{
   display:flex;
   align-items:center;
@@ -107,7 +101,7 @@ body{
   50%{opacity:.4; transform:scale(.75);}
 }
 
-/* ---------- header con nombre del bot ---------- */
+/* Header */
 header.hero{
   padding:22px 18px 6px;
   max-width:880px;
@@ -133,7 +127,7 @@ header.hero p{
   max-width:60ch;
 }
 
-/* ---------- contenedor principal ---------- */
+/* Contenedor principal */
 main{
   flex:1;
   width:100%;
@@ -145,7 +139,7 @@ main{
   min-height:0;
 }
 
-/* ---------- menú de accesos rápidos ---------- */
+/* Accesos rápidos */
 .quickmenu{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(210px,1fr));
@@ -181,7 +175,7 @@ main{
   font-weight:700;
 }
 
-/* ---------- ventana de chat ---------- */
+/* Ventana de chat */
 .chatwindow{
   flex:1;
   min-height:0;
@@ -204,7 +198,7 @@ main{
 .chatlog:focus-visible{outline:none;}
 
 .msg{
-  max-width:82%;
+  max-width:84%;
   display:flex;
   flex-direction:column;
   gap:4px;
@@ -219,6 +213,9 @@ main{
   font-size:11px;
   color:var(--text-lo);
   letter-spacing:.02em;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 .msg .bubble{
   border-radius:12px;
@@ -230,7 +227,8 @@ main{
 }
 .msg .bubble p{margin:0 0 8px;}
 .msg .bubble p:last-child{margin-bottom:0;}
-.msg .bubble ul{margin:6px 0; padding-left:20px;}
+.msg .bubble a{color:var(--cyan); word-break:break-all;}
+
 .msg.bot{align-self:flex-start;}
 .msg.bot .bubble{
   background:var(--bg-2);
@@ -239,6 +237,7 @@ main{
   color:var(--text-hi);
 }
 .msg.bot .who{color:var(--amber);}
+
 .msg.user{align-self:flex-end;}
 .msg.user .bubble{
   background:rgba(87,217,201,0.12);
@@ -246,7 +245,45 @@ main{
   border-top-right-radius:4px;
   color:var(--text-hi);
 }
-.msg.user .who{color:var(--cyan); text-align:right;}
+.msg.user .who{color:var(--cyan); justify-content:flex-end;}
+
+/* Botón accesible de lectura por voz */
+.bot-footer{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  margin-top:6px;
+  padding-top:4px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.btn-speech{
+  background:transparent;
+  border:1px solid var(--line);
+  color:var(--text-lo);
+  border-radius:6px;
+  padding:3px 8px;
+  font-size:12px;
+  font-family:var(--mono);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  transition:all 0.15s ease;
+}
+.btn-speech:hover{
+  background:var(--bg-1);
+  color:var(--cyan);
+  border-color:var(--cyan-dim);
+}
+.btn-speech:focus-visible{
+  outline:2px solid var(--cyan);
+  outline-offset:1px;
+}
+.btn-speech.speaking{
+  background:rgba(232,96,122,0.15);
+  border-color:var(--err);
+  color:var(--err);
+}
 
 .typing{
   display:inline-flex; gap:4px; align-items:center; padding:2px 0;
@@ -263,7 +300,7 @@ main{
   40%{opacity:1;}
 }
 
-/* ---------- barra de entrada ---------- */
+/* Barra de entrada */
 .inputbar{
   border:1px solid var(--line);
   border-top:none;
@@ -318,9 +355,7 @@ footer.note{
   font-size:12px;
   font-family:var(--mono);
 }
-footer.note a{color:var(--cyan);}
 
-/* ---------- responsive ---------- */
 @media (max-width: 600px){
   header.hero h1{font-size:21px;}
   .quickmenu{grid-template-columns:1fr;}
@@ -328,14 +363,9 @@ footer.note a{color:var(--cyan);}
   .filetab{display:none;}
 }
 
-/* scrollbar sobria */
 .chatlog::-webkit-scrollbar{width:9px;}
 .chatlog::-webkit-scrollbar-track{background:transparent;}
 .chatlog::-webkit-scrollbar-thumb{background:var(--line); border-radius:6px;}
-
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
-}
 </style>
 </head>
 <body>
@@ -345,14 +375,14 @@ footer.note a{color:var(--cyan);}
   <div class="filetab">progia<b>.py</b></div>
   <div class="status-pill" id="statusPill" role="status" aria-live="polite">
     <span class="status-dot" id="statusDot"></span>
-    <span id="statusText">Iniciando base de conocimiento…</span>
+    <span id="statusText">Cargando base de conocimiento…</span>
   </div>
 </div>
 
 <header class="hero">
   <p class="eyebrow"># cátedra_programación_1 / asistente virtual</p>
   <h1>Prog<span class="amp">IA</span></h1>
-  <p>Preguntame por el cronograma, el contrato didáctico, las unidades, los encuentros virtuales, el plantel docente o el programa de la materia. Escribí tu consulta o usá los accesos rápidos.</p>
+  <p>Preguntame por el cronograma, la modalidad, las evaluaciones por proceso, el TPI, las fechas o el plantel docente. Escribí tu duda o usá los accesos rápidos.</p>
 </header>
 
 <main>
@@ -361,76 +391,38 @@ footer.note a{color:var(--cyan);}
   <div class="chatwindow">
     <div class="chatlog" id="chatlog" role="log" aria-live="polite" tabindex="0"></div>
     <div class="inputbar">
-      <label for="userInput" class="sr-only" style="position:absolute; left:-9999px;">Escribí tu consulta</label>
+      <label for="userInput" style="position:absolute; left:-9999px;">Escribí tu consulta</label>
       <textarea id="userInput" rows="1" placeholder="Escribí tu consulta acá... (Enter para enviar)"></textarea>
       <button class="sendbtn" id="sendBtn" type="button">Enviar</button>
     </div>
   </div>
 </main>
 
-<footer class="note">// ProgIA responde en base a los documentos de la cátedra cargados en este repositorio.</footer>
+<footer class="note">// ProgIA responde en base al material oficial de la cátedra de Programación 1.</footer>
 
 <script>
 /* =====================================================
-   CONFIGURACIÓN — EDITAR ACÁ
-   Lista de archivos que ProgIA va a descargar y leer al
-   iniciar. Tienen que estar en la MISMA carpeta que este
-   index.html dentro del repositorio de GitHub Pages.
-   Soporta archivos .pdf y .txt (los .txt se leen directo,
-   sin pasar por PDF.js).
+   CONFIGURACIÓN DE LA BASE DE DATOS
    ===================================================== */
-const ARCHIVOS_BASE = [
-  'Cronograma_2C_2026.pdf',
-  'Guía_de_Cursada.pdf',
-  'Equipo_Docente.pdf',
-  'Link_Zoom.pdf'
-  // Agregá o quitá nombres de archivo acá, por ejemplo:
-  // 'docentes.txt',
-  // 'encuentros_virtuales.pdf',
-  // IMPORTANTE: el nombre tiene que ser IDÉNTICO (mayúsculas,
-  // tildes, guiones bajos) al del archivo subido al repositorio.
-];
+const ARCHIVO_JSON = 'base_conocimiento.json';
 
-// Ruta base de archivos: '' = misma carpeta que index.html.
-const RUTA_BASE = '';
-
-// Config de PDF.js worker (CDN, misma versión que el <script> del <head>)
-if (window['pdfjsLib']) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-}
-
-/* =====================================================
-   ESTADO GLOBAL
-   ===================================================== */
-// Guarda { archivo, texto } por cada documento cargado.
 let BASE_CONOCIMIENTO = [];
-// Trocitos indexables (documento + fragmento de texto) para la búsqueda.
-let INDICE = [];
+let MOTOR_BUSQUEDA = null;
 let CARGA_COMPLETA = false;
-
-const MENSAJE_FUERA_DE_ALCANCE =
-  "Puedo ayudarte con temas informativos de la materia (como fechas, cronograma, unidades, encuentros virtuales o el contrato pedagógico). Para trámites particulares o consultas docentes, por favor comunicate por el canal oficial de la cátedra.";
-
-const MENSAJE_LIMITES =
-  "Recordá que las situaciones personales (justificación de inasistencias, revisión de exámenes, prórrogas, etc.) las tenés que resolver directamente con los profesores por el canal oficial de la cátedra. Yo solo puedo darte información general de la materia.";
 
 /* =====================================================
    ACCESOS RÁPIDOS
-   Cada botón dispara una consulta prearmada que pasa por
-   el mismo motor de búsqueda que la entrada libre.
    ===================================================== */
 const ACCESOS_RAPIDOS = [
-  { tag: '01', texto: 'Contrato Didáctico / Guía de Cursada', consulta: 'contrato didáctico guía de cursada pautas de aprobación regularidad entregas' },
-  { tag: '02', texto: 'Cronograma y Fechas Importantes', consulta: 'cronograma fechas importantes parciales recuperatorios cierres' },
-  { tag: '03', texto: 'Habilitación de Unidades', consulta: 'habilitación de unidades cronograma de apertura de temas' },
-  { tag: '04', texto: 'Encuentros Virtuales', consulta: 'encuentros virtuales días horarios modalidad sincrónicos' },
-  { tag: '05', texto: 'Plantel Docente y Contacto', consulta: 'plantel docente profesores contacto canal oficial' },
-  //{ tag: '06', texto: 'Programa de la Materia', consulta: 'programa de la materia contenidos mínimos ejes temáticos' },
+  { tag: '01', texto: 'Modalidad y Encuentros por Zoom', consulta: 'horarios de clases virtuales y link de zoom' },
+  { tag: '02', texto: 'Evaluación y Aprobación Directa', consulta: 'como se evalua evaluacion por proceso y aprobacion directa promocion' },
+  { tag: '03', texto: 'Trabajo Práctico Integrador (TPI)', consulta: 'trabajo practico integrador tpi grupos requisitos de entrega' },
+  { tag: '04', texto: 'Fechas de Evaluaciones y Recuperatorios', consulta: 'fechas de actividades evaluativas y recuperatorios cronograma' },
+  { tag: '05', texto: 'Plantel Docente y Contacto', consulta: 'profesores jtp ayudantes correos de contacto' }
 ];
 
 /* =====================================================
-   UTILIDADES DE UI
+   REFERENCIAS UI
    ===================================================== */
 const chatlog = document.getElementById('chatlog');
 const userInput = document.getElementById('userInput');
@@ -443,15 +435,89 @@ function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// Convierte texto plano con saltos de línea en párrafos <p> simples.
+// Convierte saltos de línea y enlaces a HTML interactivo
 function formatearRespuesta(texto){
-  return texto
+  const textoConLinks = texto.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+  return textoConLinks
     .split(/\n{2,}/)
-    .map(p => `<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`)
+    .map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`)
     .join('');
 }
 
-function agregarMensaje(rol, textoPlano, htmlDirecto){
+/* =====================================================
+   LECTOR DE VOZ ACCESIBLE (Web Speech API)
+   ===================================================== */
+let vozSeleccionada = null;
+
+function cargarVoces(){
+  if (!('speechSynthesis' in window)) return;
+  const voces = window.speechSynthesis.getVoices();
+  // Busca voz en español (Argentina, regional o genérica)
+  vozSeleccionada = voces.find(v => v.lang === 'es-AR') ||
+                    voces.find(v => v.lang.startsWith('es-419')) ||
+                    voces.find(v => v.lang.startsWith('es-')) ||
+                    voces.find(v => v.lang.includes('es')) ||
+                    null;
+}
+
+if ('speechSynthesis' in window){
+  cargarVoces();
+  window.speechSynthesis.onvoiceschanged = cargarVoces;
+}
+
+function detenerLectura(){
+  if ('speechSynthesis' in window && window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+  }
+  document.querySelectorAll('.btn-speech').forEach(btn => {
+    btn.classList.remove('speaking');
+    btn.setAttribute('aria-label', 'Escuchar respuesta en voz alta');
+    btn.innerHTML = '<span>🔊</span><span>Escuchar</span>';
+  });
+}
+
+function reproducirVoz(textoPlano, boton){
+  if (!('speechSynthesis' in window)){
+    alert("Tu navegador no soporta lectura por voz.");
+    return;
+  }
+
+  // Si ya estaba hablando este mismo botón, lo pausa
+  if (boton.classList.contains('speaking')){
+    detenerLectura();
+    return;
+  }
+
+  // Detiene cualquier lectura previa
+  detenerLectura();
+
+  // Limpia URLs para que la voz no deletree enlaces largos
+  const textoLimpio = textoPlano.replace(/https?:\/\/[^\s]+/g, 'el enlace adjunto');
+
+  const utterance = new SpeechSynthesisUtterance(textoLimpio);
+  utterance.lang = 'es-AR';
+  utterance.rate = 1.0;
+  if (vozSeleccionada) utterance.voice = vozSeleccionada;
+
+  utterance.onstart = () => {
+    boton.classList.add('speaking');
+    boton.setAttribute('aria-label', 'Detener lectura en voz alta');
+    boton.innerHTML = '<span>⏹</span><span>Detener</span>';
+  };
+
+  utterance.onend = utterance.onerror = () => {
+    boton.classList.remove('speaking');
+    boton.setAttribute('aria-label', 'Escuchar respuesta en voz alta');
+    boton.innerHTML = '<span>🔊</span><span>Escuchar</span>';
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+/* =====================================================
+   RENDERIZADO DE MENSAJES
+   ===================================================== */
+function agregarMensaje(rol, textoPlano){
   const wrap = document.createElement('div');
   wrap.className = 'msg ' + (rol === 'bot' ? 'bot' : 'user');
 
@@ -461,7 +527,23 @@ function agregarMensaje(rol, textoPlano, htmlDirecto){
 
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
-  bubble.innerHTML = htmlDirecto ? htmlDirecto : formatearRespuesta(textoPlano);
+  bubble.innerHTML = formatearRespuesta(textoPlano);
+
+  // Agregar botón de voz si es respuesta del bot
+  if (rol === 'bot'){
+    const footer = document.createElement('div');
+    footer.className = 'bot-footer';
+
+    const btnSpeech = document.createElement('button');
+    btnSpeech.type = 'button';
+    btnSpeech.className = 'btn-speech';
+    btnSpeech.setAttribute('aria-label', 'Escuchar respuesta en voz alta');
+    btnSpeech.innerHTML = '<span>🔊</span><span>Escuchar</span>';
+    btnSpeech.addEventListener('click', () => reproducirVoz(textoPlano, btnSpeech));
+
+    footer.appendChild(btnSpeech);
+    bubble.appendChild(footer);
+  }
 
   wrap.appendChild(who);
   wrap.appendChild(bubble);
@@ -503,221 +585,60 @@ function actualizarEstado(texto, tipo){
 }
 
 /* =====================================================
-   CARGA DE LA BASE DE CONOCIMIENTO
+   CARGA DE BASE DE DATOS Y CONFIGURACIÓN FUSE.JS
    ===================================================== */
-async function extraerTextoPDF(arrayBuffer){
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  let textoCompleto = '';
-  for (let i = 1; i <= pdf.numPages; i++){
-    const pagina = await pdf.getPage(i);
-    const contenido = await pagina.getTextContent();
-    const textoPagina = contenido.items.map(it => it.str).join(' ');
-    textoCompleto += textoPagina + '\n\n';
-  }
-  return textoCompleto;
-}
-
-async function cargarArchivo(nombre){
-  // encodeURI respeta '/' pero codifica espacios, tildes, ñ, etc.,
-  // para que el fetch funcione sin importar cómo el navegador
-  // normalice el nombre del archivo.
-  const url = encodeURI(RUTA_BASE + nombre);
-  let resp;
-  try{
-    resp = await fetch(url, { cache: 'no-store' });
-  } catch (errRed){
-    throw new Error(`Error de red al pedir "${nombre}": ${errRed.message}`);
-  }
-  if (!resp.ok){
-    throw new Error(`"${nombre}" respondió HTTP ${resp.status} (${resp.status === 404 ? 'no se encontró el archivo con ese nombre exacto en el repositorio' : 'ver detalle en la consola'})`);
-  }
-  if (nombre.toLowerCase().endsWith('.pdf')){
-    const buffer = await resp.arrayBuffer();
-    try{
-      return await extraerTextoPDF(buffer);
-    } catch (errPdf){
-      throw new Error(`No se pudo leer el PDF "${nombre}": ${errPdf.message}`);
+async function inicializarBase(){
+  try {
+    actualizarEstado('Cargando base de conocimiento…');
+    const resp = await fetch(ARCHIVO_JSON, { cache: 'no-store' });
+    
+    if (!resp.ok){
+      throw new Error(`HTTP ${resp.status} al cargar ${ARCHIVO_JSON}`);
     }
-  } else {
-    return await resp.text();
-  }
-}
 
-// Divide el texto de un documento en fragmentos manejables para indexar
-// (por párrafo, agrupando párrafos muy cortos).
-function fragmentarTexto(texto){
-  const bloques = texto.split(/\n{1,}/).map(b => b.trim()).filter(Boolean);
-  const fragmentos = [];
-  let actual = '';
-  bloques.forEach(bloque => {
-    if ((actual + ' ' + bloque).length < 600){
-      actual = (actual + ' ' + bloque).trim();
-    } else {
-      if (actual) fragmentos.push(actual);
-      actual = bloque;
-    }
-  });
-  if (actual) fragmentos.push(actual);
-  return fragmentos;
-}
+    BASE_CONOCIMIENTO = await resp.json();
 
-async function inicializarBaseDeConocimiento(){
-  actualizarEstado('Cargando ' + ARCHIVOS_BASE.join(', ') + '…');
-  const resultados = await Promise.allSettled(
-    ARCHIVOS_BASE.map(nombre => cargarArchivo(nombre))
-  );
+    // Configuración calibrada de Fuse.js
+    const opcionesFuse = {
+      includeScore: true,
+      threshold: 0.45, // Tolerancia a errores de tipeo
+      ignoreLocation: true,
+      keys: [
+        { name: 'keywords', weight: 0.5 },
+        { name: 'preguntas_ejemplo', weight: 0.3 },
+        { name: 'tema', weight: 0.1 },
+        { name: 'respuesta', weight: 0.1 }
+      ]
+    };
 
-  const fallidos = []; // { nombre, motivo }
-  resultados.forEach((res, idx) => {
-    const nombre = ARCHIVOS_BASE[idx];
-    if (res.status === 'fulfilled' && res.value && res.value.trim().length > 0){
-      BASE_CONOCIMIENTO.push({ archivo: nombre, texto: res.value });
-      fragmentarTexto(res.value).forEach(frag => {
-        INDICE.push({ archivo: nombre, texto: frag });
-      });
-    } else {
-      const motivo = res.status === 'rejected'
-        ? res.reason.message
-        : 'el archivo se descargó pero no se pudo extraer texto (¿está vacío o es una imagen escaneada sin texto?)';
-      fallidos.push({ nombre, motivo });
-      console.error('ProgIA - error cargando', nombre, motivo);
-    }
-  });
+    MOTOR_BUSQUEDA = new Fuse(BASE_CONOCIMIENTO, opcionesFuse);
+    CARGA_COMPLETA = true;
 
-  CARGA_COMPLETA = true;
-
-  if (INDICE.length === 0){
-    actualizarEstado('No se pudo cargar la base de conocimiento', 'error');
-    const detalle = fallidos.map(f => `• ${f.nombre} → ${f.motivo}`).join('\n');
-    agregarMensaje('bot',
-      'No pude cargar ningún documento de la cátedra. Detalle por archivo:\n\n' + detalle +
-      '\n\nRevisá que cada archivo esté subido en la MISMA carpeta que este index.html, con el nombre exactamente igual (mayúsculas, tildes y guiones bajos incluidos) al configurado en ARCHIVOS_BASE. Mientras tanto, comunicate por el canal oficial de la cátedra para tus consultas.');
-    return;
-  }
-
-  if (fallidos.length > 0){
-    actualizarEstado('Base de conocimiento lista (con avisos)', 'ready');
-    const detalle = fallidos.map(f => `• ${f.nombre} → ${f.motivo}`).join('\n');
-    agregarMensaje('bot',
-      '¡Hola! Soy ProgIA 👋 Ya cargué parte de la base de conocimiento de la cátedra, pero tuve problemas con:\n\n' + detalle +
-      '\n\nPuedo igualmente ayudarte con la información de los demás documentos. Elegí una opción del menú o escribí tu consulta.');
-  } else {
     actualizarEstado('Base de conocimiento lista', 'ready');
-    agregarMensaje('bot',
-      '¡Hola! Soy ProgIA, el asistente virtual de Programación 1 🧑\u200d💻 Elegí una opción del menú de abajo o escribime directamente tu consulta.');
+    agregarMensaje('bot', '¡Hola! Soy ProgIA, el asistente virtual de la cátedra Programación 1 🧑‍💻 Podés hacerme consultas sobre horarios, el TPI, las defensas o elegir un acceso rápido.');
+
+  } catch (error){
+    console.error("ProgIA - Error cargando el JSON:", error);
+    actualizarEstado('Error al cargar la base', 'error');
+    agregarMensaje('bot', 'Hubo un inconveniente al cargar el archivo de preguntas (`base_conocimiento.json`). Verificá que se encuentre en la misma carpeta que el index.html en el repositorio.');
   }
 }
 
 /* =====================================================
-   MOTOR DE BÚSQUEDA (coincidencia de palabras clave
-   ponderada, tipo TF simplificado sobre fragmentos)
+   MOTOR DE CONSULTAS
    ===================================================== */
-const STOPWORDS = new Set([
-  'de','la','que','el','en','y','a','los','del','se','las','por','un','para',
-  'con','no','una','su','al','lo','como','mas','más','pero','sus','le','ya',
-  'o','fue','este','ha','si','sí','porque','esta','son','entre','cuando',
-  'muy','sin','sobre','tambien','también','me','hasta','hay','donde','quien',
-  'quién','desde','todo','nos','durante','todos','uno','les','ni','contra',
-  'otros','ese','eso','ante','ellos','e','esto','mí','antes','algunos','qué',
-  'unos','yo','otro','otras','otra','él','tanto','esa','estos','mucho',
-  'quienes','nada','muchos','cual','cuál','poco','ella','estar','estas',
-  'algunas','algo','nosotros','mi','mis','tú','te','ti','tu','tus','ellas',
-  'nosotras','vosotros','vosotras','os','mío','mía','míos','mías','tuyo',
-  'tuya','tuyos','tuyas','suyo','suya','suyos','suyas','nuestro','nuestra',
-  'nuestros','nuestras','vuestro','vuestra','vuestros','vuestras','esos',
-  'esas','estoy','estás','está','estamos','estáis','están','soy','eres',
-  'es','somos','sois','son','tengo','tienes','tiene','tenemos','tenéis',
-  'tienen','puedo','podes','puedes','puede','podemos','podéis','pueden',
-  'hola','buenas','buenos','dias','días','tardes','noches','gracias',
-  'porfavor','favor','quiero','quisiera','necesito','saber','decime',
-  'decir','contame','contar'
-]);
+function consultarBase(consulta){
+  if (!MOTOR_BUSQUEDA) return null;
 
-function normalizar(str){
-  return str
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // saca tildes
-    .replace(/[^a-z0-9áéíóúñü\s]/gi, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+  const resultados = MOTOR_BUSQUEDA.search(consulta);
 
-function tokenizar(str){
-  return normalizar(str)
-    .split(' ')
-    .filter(t => t.length > 2 && !STOPWORDS.has(t));
-}
-
-// Puntúa un fragmento contra los tokens de la consulta.
-function puntuarFragmento(fragmentoTokens, fragmentoTextoNorm, consultaTokens, consultaNorm){
-  let score = 0;
-  consultaTokens.forEach(tok => {
-    // coincidencia exacta de token
-    const ocurrencias = fragmentoTokens.filter(t => t === tok).length;
-    score += ocurrencias * 3;
-    // coincidencia parcial (raíz de palabra, ej. "parcial" en "parciales")
-    if (ocurrencias === 0){
-      const parcial = fragmentoTokens.some(t => t.startsWith(tok.slice(0, Math.max(4, tok.length - 2))));
-      if (parcial) score += 1;
-    }
-  });
-  // bono si la frase completa (o gran parte) aparece de corrido
-  if (consultaNorm.length > 6 && fragmentoTextoNorm.includes(consultaNorm)){
-    score += 8;
+  // Si encontró coincidencias válidas con score confiable
+  if (resultados.length > 0 && resultados[0].score <= 0.48){
+    return resultados[0].item.respuesta;
   }
-  return score;
+  return null;
 }
 
-function buscarEnBase(consulta){
-  const consultaTokens = tokenizar(consulta);
-  const consultaNorm = normalizar(consulta);
-
-  if (consultaTokens.length === 0 || INDICE.length === 0) return [];
-
-  const puntuados = INDICE.map(item => {
-    const fragTokens = tokenizar(item.texto);
-    const fragNorm = normalizar(item.texto);
-    const score = puntuarFragmento(fragTokens, fragNorm, consultaTokens, consultaNorm);
-    return { ...item, score };
-  });
-
-  puntuados.sort((a, b) => b.score - a.score);
-  return puntuados.filter(p => p.score > 0).slice(0, 4);
-}
-
-// Nombres "lindos" para mostrar la fuente en vez del nombre de archivo crudo.
-function nombreLegible(archivo){
-  const mapa = {
-    'Cronograma_2C_2026.pdf': 'Cronograma 2C 2026',
-    'Guía_de_Cursada.pdf': 'Guía de Cursada',
-    'Equipo_Docente.pdf': 'Equipo Docente',
-    'Link_Zoom.pdf': 'Link de Zoom'
-  };
-  return mapa[archivo] || archivo.replace(/\.[^.]+$/, '').replace(/_/g, ' ');
-}
-
-// Sintetiza una respuesta a partir de los mejores fragmentos encontrados.
-function redactarRespuesta(consulta, resultados){
-  if (resultados.length === 0) return null;
-
-  const fuentesUnicas = [...new Set(resultados.map(r => r.archivo))];
-  let cuerpo = '';
-
-  resultados.slice(0, 2).forEach((r, idx) => {
-    let frag = r.texto.trim().replace(/\s+/g, ' ');
-    if (frag.length > 500) frag = frag.slice(0, 500).trim() + '…';
-    cuerpo += frag + '\n\n';
-  });
-
-  const fuentesTexto = fuentesUnicas.map(nombreLegible).join(' y ');
-  cuerpo += `(Fuente: ${fuentesTexto})`;
-
-  return cuerpo.trim();
-}
-
-/* =====================================================
-   MANEJO DE CONSULTAS
-   ===================================================== */
 function manejarConsulta(textoVisible, consultaInterna){
   agregarMensaje('user', textoVisible);
   userInput.value = '';
@@ -725,7 +646,7 @@ function manejarConsulta(textoVisible, consultaInterna){
 
   if (!CARGA_COMPLETA){
     setTimeout(() => {
-      agregarMensaje('bot', 'Todavía estoy terminando de cargar los documentos de la cátedra. Probá de nuevo en unos segundos 🙂');
+      agregarMensaje('bot', 'Todavía estoy terminando de cargar la información. Probá nuevamente en un instante.');
     }, 200);
     return;
   }
@@ -735,39 +656,15 @@ function manejarConsulta(textoVisible, consultaInterna){
   setTimeout(() => {
     quitarEscribiendo();
 
-    const consultaParaBuscar = consultaInterna || textoVisible;
-    const resultados = buscarEnBase(consultaParaBuscar);
-    const respuesta = redactarRespuesta(consultaParaBuscar, resultados);
+    const query = consultaInterna || textoVisible;
+    const respuesta = consultarBase(query);
 
     if (respuesta){
       agregarMensaje('bot', respuesta);
-
-      // Si la consulta suena a un trámite personal, agregamos la aclaración de límites.
-      if (/inasisten|justificar|revisi[oó]n de examen|pr[oó]rroga|extensi[oó]n|excepci[oó]n|caso particular/i.test(textoVisible)){
-        agregarMensaje('bot', MENSAJE_LIMITES);
-      }
     } else {
-      agregarMensaje('bot', MENSAJE_FUERA_DE_ALCANCE);
-      mostrarMenuDeNuevo();
+      agregarMensaje('bot', 'No encontré información exacta sobre esa consulta en las pautas oficiales de la materia. Te recomiendo consultar en el foro del campus virtual o escribir al correo del equipo docente.');
     }
-  }, 450 + Math.random() * 350);
-}
-
-function mostrarMenuDeNuevo(){
-  const wrap = document.createElement('div');
-  wrap.className = 'msg bot';
-  const btnsHtml = ACCESOS_RAPIDOS.map(item =>
-    `<button type="button" class="qbtn" style="margin:4px 4px 0 0; display:inline-flex;" data-consulta="${escapeHtml(item.consulta)}" data-texto="${escapeHtml(item.texto)}"><span class="tag">${item.tag}</span><span>${item.texto}</span></button>`
-  ).join('');
-  wrap.innerHTML = `<div class="who">ProgIA</div><div class="bubble"><p>Elegí una opción:</p>${btnsHtml}</div>`;
-  chatlog.appendChild(wrap);
-  chatlog.scrollTop = chatlog.scrollHeight;
-
-  wrap.querySelectorAll('button[data-consulta]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      manejarConsulta(btn.dataset.texto, btn.dataset.consulta);
-    });
-  });
+  }, 350 + Math.random() * 200);
 }
 
 /* =====================================================
@@ -799,7 +696,7 @@ function enviarDesdeInput(){
    INICIO
    ===================================================== */
 renderMenu();
-inicializarBaseDeConocimiento();
+inicializarBase();
 </script>
 
 </body>
