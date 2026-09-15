@@ -5,10 +5,11 @@
     "preguntas_ejemplo": [
       "¿Cómo es la modalidad de cursada?",
       "¿La materia es presencial o virtual?",
-      "¿Tengo que ir a la facultad a cursar?"
+      "¿Tengo que ir a la facultad a cursar?",
+      "¿Es a distancia?"
     ],
-    "keywords": ["modalidad", "virtual", "presencial", "como se cursa", "cursada", "online", "distancia"],
-    "respuesta": "La cursada de Programación 1 es 100% virtual. Contamos con material de lectura, videos grabados, actividades propuestas y encuentros en vivo para resolver dudas. No existen encuentros presenciales obligatorios en esta modalidad; si preferís cursar presencialmente, existe la opción de cursada 100% presencial."
+    "keywords": ["modalidad", "virtual", "presencial", "como se cursa", "cursada", "online", "distancia", "ir a la facultad", "sede", "campus"],
+    "respuesta": "La cursada de Programación 1 es 100% virtual. Contamos con material de lectura, videos explicativos, actividades prácticas y encuentros sincrónicos en vivo para consultas. No existen instancias presenciales obligatorias en esta modalidad."
   },
   {
     "id": "horarios_clases",
@@ -16,10 +17,11 @@
     "preguntas_ejemplo": [
       "¿En qué horario son las clases virtuales?",
       "¿Qué días nos conectamos por Zoom?",
-      "¿Cuándo son los encuentros en vivo?"
+      "¿Cuándo son los encuentros en vivo?",
+      "¿A qué hora empieza la clase?"
     ],
-    "keywords": ["horario", "horarios", "dias", "zoom", "encuentros", "clases", "vivo", "martes", "miercoles", "hora", "sincronico"],
-    "respuesta": "Los encuentros virtuales en vivo se realizan dos veces por semana: los días martes y miércoles de 20:00 a 22:00 h (Turno Noche)."
+    "keywords": ["horario", "horarios", "dias", "zoom", "encuentros", "clases", "vivo", "martes", "miercoles", "hora", "sincronico", "a que hora"],
+    "respuesta": "Los encuentros virtuales sincrónicos se llevan a cabo los días martes y miércoles de 20:00 a 22:00 h (Turno Noche)."
   },
   {
     "id": "enlace_zoom",
@@ -27,10 +29,11 @@
     "preguntas_ejemplo": [
       "¿Cuál es el link de Zoom?",
       "¿Por dónde nos conectamos a las clases?",
-      "¿Dónde encuentro el enlace de la videollamada?"
+      "¿Dónde encuentro el enlace de la videollamada?",
+      "Pasame el link de zoom"
     ],
-    "keywords": ["zoom", "link", "enlace", "url", "videollamada", "conectar", "conector", "reunion"],
-    "respuesta": "Podés acceder a los encuentros virtuales de los martes y miércoles a las 20:00 h directamente mediante el enlace oficial de Zoom de la cátedra: https://utn.zoom.us/j/82029973892."
+    "keywords": ["zoom", "link", "enlace", "url", "videollamada", "conectar", "reunion", "id zoom", "link de zoom"],
+    "respuesta": "Podés conectarte a las clases de los martes y miércoles a las 20:00 h directamente a través del enlace oficial de Zoom de la cátedra: https://utn.zoom.us/j/82029973892."
   },
   {
     "id": "asistencia_regularidad",
@@ -38,10 +41,11 @@
     "preguntas_ejemplo": [
       "¿Se toma asistencia en las clases virtuales?",
       "¿Qué pasa si no me conecto a un Zoom?",
-      "¿Cómo se controla la regularidad?"
+      "¿Cómo se controla la regularidad?",
+      "¿Es obligatorio prender la cámara o conectarse?"
     ],
-    "keywords": ["asistencia", "presente", "falta", "ausente", "regularidad", "10 dias", "ingreso", "campus", "aula virtual"],
-    "respuesta": "En Programación 1 no se toma asistencia en los encuentros sincrónicos. La regularidad se mantiene a través de tu participación activa en el aula virtual. Tené en cuenta que si registrás poca actividad o no accedés al campus por 10 días o más, quedarás suspendido del aula virtual y deberás solicitar la reincorporación por correo al docente."
+    "keywords": ["asistencia", "presente", "falta", "ausente", "regularidad", "10 dias", "ingreso", "campus", "aula virtual", "obligatorio conectarse", "graban las clases"],
+    "respuesta": "En Programación 1 no se toma asistencia durante los encuentros de Zoom. La regularidad se controla exclusivamente a través de tu participación en el aula virtual. Si pasas 10 días consecutivos o más sin ingresar al campus, tu usuario quedará suspendido."
   },
   {
     "id": "reincorporacion_aula",
@@ -51,30 +55,30 @@
       "¿Qué hago si estuve más de 10 días sin entrar al aula virtual?",
       "¿Cuántas veces me pueden reincorporar?"
     ],
-    "keywords": ["reincorporacion", "suspension", "suspendido", "10 dias", "desbloqueo", "ingresar", "mail", "docente"],
-    "respuesta": "Si quedaste suspendido por inactividad de 10 días o más en el aula virtual, tenés que enviar un correo electrónico a tus docentes solicitando la reincorporación. La solicitud estará sujeta a una evaluación mutua para determinar la viabilidad de continuar. Si bien en principio no hay un límite fijado de solicitudes, pedir reincorporaciones reiteradas es un indicador de dificultades en la cursada."
+    "keywords": ["reincorporacion", "suspension", "suspendido", "10 dias", "desbloqueo", "ingresar", "mail", "docente", "inactivo"],
+    "respuesta": "Si quedaste suspendido por inactividad prolongada (10 días o más sin acceder al campus), debés enviar un correo electrónico al equipo docente explicando tu situación para solicitar la reincorporación y evaluar si es factible que continúes la cursada."
   },
   {
     "id": "docentes_equipo",
     "tema": "Docentes",
     "preguntas_ejemplo": [
       "¿Quiénes son los profesores de la materia?",
-      "¿Quién es el profesor titular y los JTP?",
+      "¿Quién es el titular y los JTP?",
       "¿Cómo está conformado el equipo docente?"
     ],
-    "keywords": ["docentes", "profesor", "profesores", "jtp", "ayudantes", "equipo docente", "maximiliano", "jose", "alejandro", "marina", "sebastian", "priscila"],
-    "respuesta": "El equipo docente de Programación 1 está compuesto por el Profesor Maximiliano Sar Fernández; los Jefes de Trabajos Prácticos (JTP) José Alberto Rodríguez y Alejandro Gómez Nieto; y los Ayudantes de Trabajos Prácticos Marina Chávez, Sebastián Exequiel Duarte y Priscila Alori."
+    "keywords": ["docentes", "profesor", "profesores", "jtp", "ayudantes", "equipo docente", "maximiliano", "jose", "alejandro", "marina", "sebastian", "priscila", "plantel"],
+    "respuesta": "El equipo docente de Programación 1 está compuesto por el Profesor Titular Maximiliano Sar Fernández; los Jefes de Trabajos Prácticos (JTP) José Alberto Rodríguez y Alejandro Gómez Nieto; y los Ayudantes Marina Chávez, Sebastián Exequiel Duarte y Priscila Alori."
   },
   {
     "id": "contacto_docentes",
     "tema": "Docentes",
     "preguntas_ejemplo": [
       "¿Cuáles son los mails de los profesores?",
-      "¿Cómo me contacto de forma privada con los docentes?",
-      "¿A qué correo debo escribir por un tema personal?"
+      "¿Cómo me contacto en privado con los docentes?",
+      "¿A qué correo escribo por una duda particular?"
     ],
-    "keywords": ["mail", "email", "correo", "contacto", "escribir", "docentes", "profesor", "mensaje"],
-    "respuesta": "Para consultas particulares o privadas podés escribir a los correos institucionales: Profesor Maximiliano Sar Fernández (msarfernandez@docentes.frgp.utn.edu.ar), JTP José Alberto Rodríguez (jarodriguez@docentes.frgp.utn.edu.ar), JTP Alejandro Gómez Nieto (agomez@docentes.frgp.utn.edu.ar), o los ayudantes Marina Chávez (marina.chavez@alumnos.frgp.utn.edu.ar), Sebastián Duarte (sebastian.duarte2@alumnos.frgp.utn.edu.ar) y Priscila Alori (priscila.alori@alumnos.frgp.utn.edu.ar). Recordá siempre copiar al menos a dos docentes en tu correo."
+    "keywords": ["mail", "email", "correo", "contacto", "escribir", "docentes", "profesor", "mensaje", "direcciones"],
+    "respuesta": "Los correos institucionales del equipo docente son:\n- Prof. Maximiliano Sar Fernández: msarfernandez@docentes.frgp.utn.edu.ar\n- JTP José Alberto Rodríguez: jarodriguez@docentes.frgp.utn.edu.ar\n- JTP Alejandro Gómez Nieto: agomez@docentes.frgp.utn.edu.ar\n- Ayudantes: marina.chavez@alumnos.frgp.utn.edu.ar, sebastian.duarte2@alumnos.frgp.utn.edu.ar y priscila.alori@alumnos.frgp.utn.edu.ar.\nRecordá siempre copiar al menos a dos docentes en cualquier consulta personal."
   },
   {
     "id": "canales_comunicacion",
@@ -82,229 +86,245 @@
     "preguntas_ejemplo": [
       "¿Cuáles son los medios de comunicación oficiales?",
       "¿Usan la mensajería interna del campus?",
-      "¿Dónde se publican los avisos importantes?"
+      "¿Dónde se publican las novedades?"
     ],
-    "keywords": ["comunicacion", "canales", "foros", "avisos", "dudas", "cafeteria", "mensajeria", "campus", "email"],
-    "respuesta": "La comunicación oficial se realiza exclusivamente mediante los Foros del Aula Virtual (Avisos, Dudas por unidad y Cafetería) y el correo electrónico para temas personales. No se utiliza la mensajería interna del campus virtual. Es fundamental revisar diariamente el foro de Avisos para estar al día con las novedades."
+    "keywords": ["comunicacion", "canales", "foros", "avisos", "dudas", "cafeteria", "mensajeria", "campus", "email oficial"],
+    "respuesta": "La comunicación oficial se gestiona exclusivamente por los Foros del Campus Virtual (Avisos, Dudas por unidad y Cafetería) y mediante correo institucional para temas individuales. La mensajería interna del campus no se utiliza como canal de contacto."
   },
   {
     "id": "normas_email",
     "tema": "Comunicación",
     "preguntas_ejemplo": [
-      "¿Cómo debo redactar un correo a los profesores?",
-      "¿A cuántos docentes debo enviar un mail personal?",
-      "¿Qué datos debo incluir en el correo?"
+      "¿Cómo redactar un correo a los profesores?",
+      "¿A cuántos docentes debo mandar mail?",
+      "¿Qué datos poner en el mail?"
     ],
-    "keywords": ["email", "correo", "copiar", "formato", "datos", "asunto", "redaccion", "normas"],
-    "respuesta": "Al enviar un correo electrónico por un asunto particular no público, debés copiar al menos a dos integrantes del equipo docente. En el mensaje es obligatorio incluir: nombre, apellido, materia, comisión y la consulta específica."
+    "keywords": ["email", "correo", "copiar", "formato", "datos", "asunto", "redaccion", "normas de correo"],
+    "respuesta": "Al enviar un correo personal, debés copiar obligatoriamente a un mínimo de dos docentes del equipo e indicar en el cuerpo del mensaje: Nombre, Apellido, Materia, Comisión y el motivo detallado de la consulta."
   },
   {
     "id": "estructura_etapas",
     "tema": "Contenidos",
     "preguntas_ejemplo": [
-      "¿Cómo se organiza el temario de la materia?",
-      "¿Cuántas etapas tiene la cursada?",
-      "¿Qué unidades entran en la primera etapa?"
+      "¿Cómo se divide la materia?",
+      "¿Cuántas etapas son?",
+      "¿Qué temas entran en la primera etapa y en la segunda?"
     ],
-    "keywords": ["etapas", "etapa 1", "etapa 2", "unidades", "temario", "estructura", "organizacion"],
-    "respuesta": "La cursada se divide estrictamente en dos etapas consecutivas: la Etapa 1 comprende las Unidades 1 a 4 (Conceptos iniciales, Condicionales, Ciclos y Ciclos combinados/Corte de Control); y la Etapa 2 abarca las Unidades 5 y 6 (Funciones, Vectores, Structs, Lotes de Carga) más el Trabajo Práctico Integrador. Es necesario aprobar la primera parte para poder continuar con la siguiente."
+    "keywords": ["etapas", "etapa 1", "etapa 2", "unidades", "temario", "estructura", "organizacion", "modulos"],
+    "respuesta": "La materia se divide en dos etapas correlativas:\n- Etapa 1: Unidades 1 a 4 (Lógica inicial, Condicionales, Ciclos y Ciclos combinados / Corte de Control).\n- Etapa 2: Unidades 5 y 6 (Funciones, Vectores, Structs y Lotes de Carga) más el Trabajo Práctico Integrador (TPI).\nEs obligatorio aprobar la Etapa 1 para poder avanzar a la Etapa 2."
   },
   {
     "id": "evaluacion_proceso",
     "tema": "Evaluaciones",
     "preguntas_ejemplo": [
       "¿Hay parciales escritos tradicionales?",
-      "¿Cómo nos van a evaluar durante el cuatrimestre?",
-      "¿En qué consiste la evaluación por proceso?"
+      "¿Cómo nos evalúan?",
+      "¿Qué es la evaluación por proceso?"
     ],
-    "keywords": ["evaluacion", "evaluacion por proceso", "parciales", "actividades", "cuestionarios", "foros", "sin examenes"],
-    "respuesta": "Programación 1 no cuenta con exámenes escritos convencionales. Se trabaja bajo la modalidad de 'evaluación por proceso', donde se evalúa cada paso dado en la cursada mediante actividades propuestas individuales y colaborativas en equipo (cuestionarios, foros y el Trabajo Práctico Integrador)."
+    "keywords": ["evaluacion", "evaluacion por proceso", "parciales", "actividades", "cuestionarios", "foros", "sin examenes", "como rindo"],
+    "respuesta": "En Programación 1 no se toman parciales convencionales en hojas de examen. Se aplica la 'evaluación por proceso', valorando el progreso continuo a través de cuestionarios periódicos, participación en foros y el desarrollo y defensa del TPI."
   },
   {
     "id": "actividades_evaluativas",
     "tema": "Actividades",
     "preguntas_ejemplo": [
-      "¿Qué tipo de actividades se realizan en la cursada?",
-      "¿Alcanza solo con responder los cuestionarios?",
-      "¿Las actividades son obligatorias?"
+      "¿Son obligatorias todas las actividades?",
+      "¿Alcanza con aprobar solo los cuestionarios?",
+      "¿Qué pasa si no participo en los foros?"
     ],
-    "keywords": ["actividades", "cuestionarios", "foros", "obligatorias", "entrega", "evaluativas", "etapa 1"],
-    "respuesta": "Todas las actividades propuestas en el campus son de carácter obligatorio. Incluyen cuestionarios y foros de participación. La aprobación únicamente de los cuestionarios NO otorga la aprobación de la etapa, por lo que debés participar activamente en todas las instancias."
+    "keywords": ["actividades", "cuestionarios", "foros", "obligatorias", "entrega", "evaluativas", "todas las actividades"],
+    "respuesta": "Todas las actividades asignadas en el campus son de carácter obligatorio. Aprobar únicamente los cuestionarios no es suficiente para regularizar la etapa: se requiere haber completado también las actividades prácticas y los foros participativos."
   },
   {
     "id": "fechas_actividades_etapa1",
     "tema": "Fechas",
     "preguntas_ejemplo": [
-      "¿Cuáles son las fechas de las actividades evaluativas de la Etapa 1?",
-      "¿Cuándo se entregan los cuestionarios iniciales?",
-      "¿En qué semanas hay evaluaciones en la primera parte?"
+      "¿Cuáles son las fechas de las actividades de la Etapa 1?",
+      "¿Cuándo se entregan los cuestionarios?",
+      "¿Qué fechas hay en septiembre y agosto?"
     ],
-    "keywords": ["fechas", "actividades evaluativas", "actividad evaluativa 1", "actividad evaluativa 2", "actividad evaluativa 3", "actividad evaluativa 4", "cronograma", "septiembre"],
-    "respuesta": "Según el cronograma del segundo cuatrimestre 2026, las Actividades Evaluativas de la Etapa 1 están agendadas en las siguientes fechas: Actividad Evaluativa 1 el 25/08, Actividad Evaluativa 2 el 01/09, Actividad Evaluativa 3 el 08/09 y Actividad Evaluativa 4 el 22/09."
+    "keywords": ["fechas", "actividades evaluativas", "actividad evaluativa 1", "actividad evaluativa 2", "actividad evaluativa 3", "actividad evaluativa 4", "cronograma", "septiembre", "agosto"],
+    "respuesta": "El cronograma de las Actividades Evaluativas de la Etapa 1 es:\n- Actividad Evaluativa 1: 25/08\n- Actividad Evaluativa 2: 01/09\n- Actividad Evaluativa 3: 08/09\n- Actividad Evaluativa 4: 22/09."
   },
   {
     "id": "escala_calificacion",
     "tema": "Régimen de Aprobación",
     "preguntas_ejemplo": [
-      "¿Con qué nota se aprueban las actividades?",
-      "¿Cómo se califican los foros de participación?",
-      "¿Cuál es la nota mínima de aprobación?"
+      "¿Con qué nota se aprueba?",
+      "¿Cuál es la nota mínima para aprobar?",
+      "¿Cómo se califican los foros?"
     ],
-    "keywords": ["calificacion", "notas", "nota minima", "aprobado", "escala", "foros", "seis", "6"],
-    "respuesta": "La mayoría de las actividades se califican con notas entre 1 y 10, siendo 6 el valor mínimo para aprobar. Los foros participativos se evalúan con una escala cualitativa: No alcanza, Recupera, Aprobado--, Aprobado y Aprobado++ (siendo Aprobado-- el nivel mínimo de aprobación)."
+    "keywords": ["calificacion", "notas", "nota minima", "aprobado", "escala", "foros", "seis", "6", "con cuanto apruebo"],
+    "respuesta": "La escala de calificación para tareas y cuestionarios va de 1 a 10, requiriéndose una nota mínima de 6 para aprobar. Los foros se evalúan con escala conceptual: No alcanza, Recupera, Aprobado--, Aprobado y Aprobado++ (siendo Aprobado-- la mínima nota positiva)."
   },
   {
     "id": "tiempo_gracia_recuperatorios",
     "tema": "Recuperatorio",
     "preguntas_ejemplo": [
-      "¿Qué pasa si desapruebo una actividad o me atraso?",
-      "¿Hay tiempo de recuperación para ponerse al día?",
+      "¿Qué pasa si me atraso con una entrega?",
+      "¿Hay tiempo de recuperación para entregas adeudadas?",
       "¿Cuándo es el recuperatorio de la Etapa 1?"
     ],
-    "keywords": ["recuperatorio", "tiempo de gracia", "atraso", "recuperar", "desaprobado", "etapa 1", "29 de septiembre"],
-    "respuesta": "Cada Etapa cuenta con un 'tiempo de gracia' o lapso de recuperación para completar actividades atrasadas o corregir entregas. El recuperatorio de la Etapa 1 (Unidades 1, 2, 3 y 4) está programado para el martes 29/09. Todo pendiente de la primera parte debe regularizarse antes de comenzar la Etapa 2."
+    "keywords": ["recuperatorio", "tiempo de gracia", "atraso", "recuperar", "desaprobado", "etapa 1", "29 de septiembre", "fecha recuperatorio"],
+    "respuesta": "Al cierre de cada etapa existe un período de 'tiempo de gracia' para regularizar actividades pendientes o rehacer entregas desaprobadas. La fecha límite de recuperación de la Etapa 1 (Unidades 1 a 4) es el martes 29/09."
   },
   {
     "id": "nota_minima_recuperatorio",
     "tema": "Recuperatorio",
     "preguntas_ejemplo": [
       "¿Con qué nota se aprueba un recuperatorio?",
-      "¿Puedo recuperar el Trabajo Práctico Integrador si me va mal?",
-      "¿Cuántos recuperatorios hay?"
+      "¿Qué nota necesito en el recuperatorio del TPI?",
+      "¿Cuántos recuperatorios se pueden rendir?"
     ],
-    "keywords": ["recuperatorio", "nota minima", "6", "seis", "instancias", "tpi", "defensa"],
-    "respuesta": "Se ofrece al menos un recuperatorio de similares características para cada instancia evaluativa no aprobada (actividades y Trabajo Práctico Integrador). La nota mínima requerida para aprobar cualquier recuperatorio es de 6 puntos."
+    "keywords": ["recuperatorio", "nota minima", "6", "seis", "instancias", "tpi", "defensa", "aprobar recuperatorio"],
+    "respuesta": "Cada instancia evaluativa no superada tiene derecho a al menos un recuperatorio. Para darlo por aprobado se exige una nota de 6 puntos o superior."
   },
   {
     "id": "tpi_consigna_grupos",
     "tema": "Trabajo Práctico Integrador",
     "preguntas_ejemplo": [
-      "¿En qué consiste el Trabajo Práctico Integrador (TPI)?",
-      "¿De cuántos integrantes deben ser los grupos del TPI?",
-      "¿Puedo hacer el TPI en forma individual?"
+      "¿Cómo es el TPI?",
+      "¿De cuántas personas son los grupos?",
+      "¿Se puede hacer el TPI solo o individual?"
     ],
-    "keywords": ["tpi", "trabajo practico integrador", "grupos", "integrantes", "3 personas", "individual", "equipo", "consigna"],
-    "respuesta": "El Trabajo Práctico Integrador (TPI) de la Etapa 2 consiste en desarrollar una solución en C++ a un problema real propuesto por los docentes durante aproximadamente un mes. Se realiza obligatoriamente en equipos de 3 integrantes y no está permitido hacerlo de manera individual."
+    "keywords": ["tpi", "trabajo practico integrador", "grupos", "integrantes", "3 personas", "individual", "equipo", "consigna", "hacerlo solo", "grupo de a dos"],
+    "respuesta": "El Trabajo Práctico Integrador (TPI) de la Etapa 2 consiste en desarrollar una aplicación completa en C++ durante un mes. Es de carácter grupal obligatorio y se conforma estrictamente por equipos de 3 estudiantes. No está permitido realizarlo de forma individual."
+  },
+  {
+    "id": "tpi_abandono_companero",
+    "tema": "Trabajo Práctico Integrador",
+    "preguntas_ejemplo": [
+      "¿Qué pasa si un compañero del grupo abandona?",
+      "¿Qué hacemos si alguien no trabaja en el TPI?",
+      "¿Podemos continuar de a dos si uno deja la materia?"
+    ],
+    "keywords": ["abandono", "compañero dejo", "no trabaja", "grupo de a dos", "quedo solo", "problemas de grupo", "grupo incompleto"],
+    "respuesta": "Si un compañero abandona la cursada o no colabora en las entregas, deben informarlo de inmediato a los docentes por correo. El equipo podrá continuar con los integrantes restantes o, en caso necesario, coordinar con la cátedra una reestructuración de grupos."
   },
   {
     "id": "requisitos_rendir_tpi",
     "tema": "Trabajo Práctico Integrador",
     "preguntas_ejemplo": [
-      "¿Qué necesito para poder hacer el TPI?",
-      "¿Puedo hacer el TPI si me quedó pendiente alguna actividad de la Etapa 1?",
-      "¿Qué promedio necesito en la Etapa 1?"
+      "¿Cuáles son las condiciones para hacer el TPI?",
+      "¿Puedo arrancar el TPI si adeudo cosas de la Etapa 1?",
+      "¿Qué promedio necesito para pasar a la Etapa 2?"
     ],
-    "keywords": ["requisitos tpi", "promedio 6", "etapa 1 aprobada", "condiciones", "tpi", "etapa 2"],
-    "respuesta": "Para poder realizar y presentar el Trabajo Práctico Integrador de la Etapa 2 es requisito obligatorio tener aprobada la Etapa 1 completa con un promedio de nota de 6 puntos o más."
+    "keywords": ["requisitos tpi", "promedio 6", "etapa 1 aprobada", "condiciones", "tpi", "etapa 2", "pasar de etapa"],
+    "respuesta": "Para estar habilitado a desarrollar y presentar el TPI en la Etapa 2 es requisito excluyente tener completamente aprobada la Etapa 1 con un promedio general de 6 puntos o más."
   },
   {
     "id": "defensa_tpi",
     "tema": "Trabajo Práctico Integrador",
     "preguntas_ejemplo": [
-      "¿Cómo se evalúa la defensa del TPI?",
-      "¿La defensa del proyecto es grupal o individual?",
-      "¿Qué preguntan en la defensa sincrónica?"
+      "¿Cómo se califica la defensa del TPI?",
+      "¿La defensa es individual o en grupo?",
+      "¿Qué toman en la defensa virtual?"
     ],
-    "keywords": ["defensa", "tpi", "defensa individual", "zoom", "preguntas", "modificar codigo", "sincronica", "llamado"],
-    "respuesta": "Al finalizar el proyecto y entregar el código, cada integrante del equipo debe defender su contribución de forma individual a través de un encuentro sincrónico en vivo. Se evalúa con preguntas teórico-prácticas o solicitando modificaciones de código en el momento, siendo la defensa individual el factor principal para la nota (mínimo 6 puntos para aprobar)."
+    "keywords": ["defensa", "tpi", "defensa individual", "zoom", "preguntas", "modificar codigo", "sincronica", "llamado", "como es la defensa"],
+    "respuesta": "Una vez entregado el código del TPI, cada miembro del equipo defiende su desarrollo de forma individual y sincrónica por Zoom. Los profesores formularán preguntas sobre la lógica implementada y podrán solicitar modificaciones en vivo sobre el código fuente (se aprueba con 6)."
   },
   {
     "id": "fechas_defensas_tpi",
     "tema": "Fechas",
     "preguntas_ejemplo": [
-      "¿En qué fechas son las defensas del TPI?",
-      "¿Cuándo son los llamados para defender el trabajo práctico?",
-      "¿Qué días de noviembre se defiende el TPI?"
+      "¿Cuáles son las fechas de defensa del TPI?",
+      "¿Qué días son los llamados para defender el proyecto?",
+      "¿Cuándo es el recuperatorio de la defensa?"
     ],
-    "keywords": ["fechas tpi", "llamados", "defensas", "noviembre", "cronograma", "1er llamado", "2do llamado", "3er llamado", "4to llamado"],
-    "respuesta": "Las defensas del TPI se organizan en cuatro llamados: 1er llamado (10/11), 2do llamado (11/11), 3er llamado (17/11) y 4to llamado (18/11). Las fechas de recuperatorio de defensas son el 24/11 (1er llamado) y 25/11 (2do llamado)."
+    "keywords": ["fechas tpi", "llamados", "defensas", "noviembre", "cronograma", "1er llamado", "2do llamado", "3er llamado", "4to llamado", "recuperatorio tpi"],
+    "respuesta": "Las defensas del TPI se distribuyen en cuatro llamados:\n- 1er llamado: 10/11\n- 2do llamado: 11/11\n- 3er llamado: 17/11\n- 4to llamado: 18/11.\nLas fechas de recuperatorios de defensas son el 24/11 (1er llamado) y 25/11 (2do llamado)."
   },
   {
     "id": "aprobacion_directa",
     "tema": "Promoción",
     "preguntas_ejemplo": [
-      "¿Cómo obtengo la aprobación directa de la materia?",
-      "¿Hay examen final si apruebo las dos etapas?",
-      "¿Cómo me promociono en Programación 1?"
+      "¿Cómo es el sistema de promoción?",
+      "¿Puedo promocionar la materia?",
+      "Obtuve 6 en Etapa 1 y un 10 en Etapa 2, puedo promocionar?",
+      "¿Qué nota necesito para promocionar?",
+      "¿La materia se promociona con 7 o con 8?"
     ],
-    "keywords": ["aprobacion directa", "promocion", "sin final", "promocionar", "requisitos", "etapa 1", "etapa 2", "cursada"],
-    "respuesta": "Habiendo aprobado todas las instancias evaluativas obligatorias (Etapa 1 y Etapa 2 con nota mínima de 6), la cursada queda automáticamente con aprobación directa."
+    "keywords": [
+      "promocion", "promocionar", "promociono", "aprobacion directa", "puedo promocionar", "6 y 10", 
+      "etapa 1 y etapa 2", "nota para promocionar", "sacar 7", "sacar 8", "sin examen final", "directa"
+    ],
+    "respuesta": "En Programación 1 NO existe la figura tradicional de 'Promoción': el régimen oficial es de Aprobación Directa. Para alcanzar la aprobación directa no se exige sacar 7 u 8, sino tener aprobadas tanto la Etapa 1 como la Etapa 2 con nota igual o mayor a 6 en cada una. Por ejemplo, si obtuviste un 6 en la Etapa 1 y un 10 en la Etapa 2, cumplís perfectamente las condiciones y aprobás directamente la materia sin rendir final."
   },
   {
     "id": "calculo_nota_final",
     "tema": "Régimen de Aprobación",
     "preguntas_ejemplo": [
       "¿Cómo se calcula la nota final de la materia?",
-      "¿Cuál es la fórmula del promedio final?",
-      "¿Cómo funcionan los redondeos de notas?"
+      "¿Cómo se promedian las dos etapas?",
+      "¿Cómo es la regla de redondeo de notas?"
     ],
-    "keywords": ["nota final", "promedio", "calculo", "formula", "etapa 1", "etapa 2", "redondeo", "0.50", "0.49"],
-    "respuesta": "La nota final de cada etapa es el promedio de las actividades de esa etapa. La nota final de la cursada es el promedio entre ambas etapas: (Etapa 1 + Etapa 2) / 2. Para el redondeo se utiliza la regla: 0.49 para abajo y 0.50 para arriba."
+    "keywords": ["nota final", "promedio", "calculo", "formula", "etapa 1", "etapa 2", "redondeo", "0.50", "0.49", "cerrar nota"],
+    "respuesta": "La nota final de la cursada surge de promediar las dos partes: (Nota Etapa 1 + Nota Etapa 2) / 2. Para los decimales se aplica el criterio: de 0.49 hacia abajo se redondea a favor del entero inferior, y de 0.50 en adelante sube al entero superior."
   },
   {
     "id": "inscripcion_mesa_final",
     "tema": "Final",
     "preguntas_ejemplo": [
-      "Si obtuve aprobación directa, ¿tengo que anotarme al final en Sysacad?",
-      "¿Cómo se me acredita la nota de aprobación directa?",
-      "¿Tengo que presentarme al examen final?"
+      "¿Tengo que inscribirme en Sysacad si alcancé la aprobación directa?",
+      "¿Debo presentarme al llamado de examen final?",
+      "¿Cómo se pasa la nota al acta?"
     ],
-    "keywords": ["sysacad", "mesa de final", "inscribirse", "aprobacion directa", "llamado", "acreditar nota", "presencia"],
-    "respuesta": "Una vez aprobada la materia por aprobación directa, debés anotarte a una mesa de examen final mediante el Sysacad al llamado correspondiente a tu turno de cursada. No es necesario que te presentes en la mesa, ya que se te cargará como nota de examen final el mismo promedio obtenido en la cursada."
+    "keywords": ["sysacad", "mesa de final", "inscribirse", "aprobacion directa", "llamado", "acreditar nota", "presencia", "acta de examen"],
+    "respuesta": "Sí, es obligatorio inscribirse mediante Sysacad en la mesa de examen final correspondiente a tu turno de cursada para que el equipo docente pueda volcar tu nota en las actas oficiales. Al tener aprobación directa, NO es necesario que asistas a la mesa."
   },
   {
     "id": "mejorar_nota_final",
     "tema": "Final",
     "preguntas_ejemplo": [
-      "¿Puedo rendir un final para subir mi nota si no me conformo?",
-      "¿Qué pasa si pido rendir final y me ausento?",
-      "¿Cómo solicito rendir el examen final?"
+      "¿Puedo presentarme a rendir examen para subir mi promedio?",
+      "¿Qué pasa si me anoto a rendir final para mejorar nota y falto?",
+      "¿Se puede subir la nota de la cursada?"
     ],
-    "keywords": ["mejorar nota", "subir nota", "rendir final", "solicitud", "ausente", "nota 2", "solicitar"],
-    "respuesta": "Si considerás que la nota final obtenida puede ser mejorada, tenés la posibilidad de solicitar rendir un examen final enviando un correo al docente. Tené en cuenta que si solicitás rendir y luego te ausentás, la nota de final asignada será 2 (dos) y quedarás adeudando el cierre de la materia."
+    "keywords": ["mejorar nota", "subir nota", "rendir final", "solicitud", "ausente", "nota 2", "voluntario"],
+    "respuesta": "Si querés mejorar tu promedio final podés solicitar rendir un examen presencial contactando previamente a los docentes. No obstante, si confirmás tu presentación y luego te ausentás, se registrará una calificación de 2 (dos) aplazando el cierre de la materia."
   },
   {
     "id": "condicion_libre_recursado",
     "tema": "Régimen de Aprobación",
     "preguntas_ejemplo": [
-      "¿Qué significa quedar en condición Libre?",
+      "¿En qué casos quedo en condición Libre?",
       "¿Por qué tendría que recursar la materia?",
-      "¿Qué pasa si desapruebo alguna instancia evaluativa?"
+      "¿Qué pasa si repruebo los recuperatorios?"
     ],
-    "keywords": ["libre", "recursar", "recursado", "sin nota", "desaprobado", "condicion libre", "perder la materia"],
-    "respuesta": "'Libre' significa que debés recursar la materia. Ocurre al desaprobar alguna instancia evaluativa o etapa sin haber alcanzado la nota mínima en sus recuperatorios, o al no completar las actividades obligatorias requeridas."
+    "keywords": ["libre", "recursar", "recursado", "sin nota", "desaprobado", "condicion libre", "perder la cursada", "perder la materia"],
+    "respuesta": "Quedás en condición de alumno 'Libre' (lo que implica tener que volver a cursar la asignatura) si desaprobás alguna de las etapas habiendo agotado sus instancias de recuperación, o si dejás de entregar las actividades obligatorias."
   },
   {
     "id": "plagio_copia_ia",
     "tema": "Régimen de Aprobación",
     "preguntas_ejemplo": [
-      "¿Qué pasa si uso Inteligencia Artificial o me copio en una actividad?",
-      "¿Cuál es la sanción por plagio en un trabajo práctico?",
-      "¿Hay recuperatorio si me descubren usando IA?"
+      "¿Se puede usar Inteligencia Artificial para resolver los ejercicios?",
+      "¿Qué pasa si me descubren una copia o código generado por IA?",
+      "¿Puedo recuperar si cometo plagio?"
     ],
-    "keywords": ["plagio", "copia", "inteligencia artificial", "ia", "chatgpt", "trampa", "sancion", "nota 1", "recursar", "sin recuperatorio"],
-    "respuesta": "Cualquier irregularidad detectada en una actividad evaluativa (plagio, copia, trabajo colectivo en tareas individuales o resolución mediante IA) se califica con nota 1 (uno) y se debe recursar la materia. No existe posibilidad de recuperatorio bajo estas circunstancias."
-  },
-  {
-    "id": "correlativas_programacion2",
-    "tema": "Contenidos",
-    "preguntas_ejemplo": [
-      "¿Cuáles son los requisitos para poder cursar Programación 2?",
-      "¿Qué materias necesito tener aprobadas o regularizadas después de Programación 1?",
-      "¿Qué correlativas pide la siguiente materia?"
-    ],
-    "keywords": ["correlativas", "programacion 2", "programacion ii", "regularizar", "arquitectura", "sistemas operativos", "requisitos"],
-    "respuesta": "Para poder cursar Programación II es necesario, como mínimo, haber regularizado Programación I y la asignatura Arquitectura y Sistemas Operativos."
+    "keywords": ["plagio", "copia", "inteligencia artificial", "ia", "chatgpt", "trampa", "sancion", "nota 1", "recursar", "sin recuperatorio", "codigo ajeno"],
+    "respuesta": "Cualquier entrega en la que se compruebe copia, plagio o generación de soluciones mediante herramientas de Inteligencia Artificial será sancionada automáticamente con calificación 1 (uno) y la pérdida de la cursada (recursado directo, sin derecho a recuperatorio)."
   },
   {
     "id": "lenguaje_herramientas",
     "tema": "Contenidos",
     "preguntas_ejemplo": [
-      "¿Qué lenguaje de programación se enseña en Programación 1?",
-      "¿Vamos a programar en C++ o en otro lenguaje?",
-      "¿Qué herramientas y representaciones usamos?"
+      "¿Qué lenguaje usamos para programar?",
+      "¿Vamos a usar C++ o C?",
+      "¿Qué entorno o IDE se recomienda usar?"
     ],
-    "keywords": ["c++", "cpp", "lenguaje", "diagrama de flujo", "algoritmos", "herramientas", "codigo"],
-    "respuesta": "En Programación 1 se enseña el pensamiento algorítmico y el diseño de soluciones a través de diagramas de flujo y del lenguaje de programación C++. Se aprende a seleccionar tipos de datos, construir estructuras de control y llevar algoritmos a código fuente ejecutable."
+    "keywords": ["c++", "cpp", "lenguaje", "diagrama de flujo", "algoritmos", "herramientas", "codigo", "codeblocks", "visual studio", "compilador"],
+    "respuesta": "En Programación 1 trabajamos con la formulación algorítmica mediante diagramas de flujo y su implementación en el lenguaje de programación C++. Los entornos habitualmente sugeridos para compilar y depurar son Code::Blocks o Visual Studio Community."
+  },
+  {
+    "id": "correlativas_programacion2",
+    "tema": "Contenidos",
+    "preguntas_ejemplo": [
+      "¿Cuáles son las correlativas de Programación 2?",
+      "¿Qué necesito tener aprobado para cursar Programación II?",
+      "¿Puedo cursar Prog 2 si regularicé Prog 1?"
+    ],
+    "keywords": ["correlativas", "programacion 2", "programacion ii", "regularizar", "arquitectura", "sistemas operativos", "cursar la que sigue"],
+    "respuesta": "Para inscribirte y cursar Programación II tenés que haber regularizado Programación I y también la materia Arquitectura y Sistemas Operativos."
   }
 ]

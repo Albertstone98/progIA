@@ -142,7 +142,7 @@ main{
 /* Accesos rápidos */
 .quickmenu{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(210px,1fr));
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
   gap:10px;
   margin-bottom:16px;
 }
@@ -198,7 +198,7 @@ main{
 .chatlog:focus-visible{outline:none;}
 
 .msg{
-  max-width:84%;
+  max-width:85%;
   display:flex;
   flex-direction:column;
   gap:4px;
@@ -219,7 +219,7 @@ main{
 }
 .msg .bubble{
   border-radius:12px;
-  padding:11px 14px;
+  padding:12px 16px;
   font-size:14.5px;
   line-height:1.55;
   white-space:pre-wrap;
@@ -227,7 +227,8 @@ main{
 }
 .msg .bubble p{margin:0 0 8px;}
 .msg .bubble p:last-child{margin-bottom:0;}
-.msg .bubble a{color:var(--cyan); word-break:break-all;}
+.msg .bubble a{color:var(--cyan); word-break:break-all; text-decoration:underline;}
+.msg .bubble a:hover{color:var(--amber);}
 
 .msg.bot{align-self:flex-start;}
 .msg.bot .bubble{
@@ -247,13 +248,13 @@ main{
 }
 .msg.user .who{color:var(--cyan); justify-content:flex-end;}
 
-/* Botón accesible de lectura por voz */
+/* Botón de lectura por voz accesible */
 .bot-footer{
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  margin-top:6px;
-  padding-top:4px;
+  margin-top:8px;
+  padding-top:6px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
 .btn-speech{
@@ -261,13 +262,13 @@ main{
   border:1px solid var(--line);
   color:var(--text-lo);
   border-radius:6px;
-  padding:3px 8px;
+  padding:4px 9px;
   font-size:12px;
   font-family:var(--mono);
   cursor:pointer;
   display:inline-flex;
   align-items:center;
-  gap:5px;
+  gap:6px;
   transition:all 0.15s ease;
 }
 .btn-speech:hover{
@@ -411,14 +412,15 @@ let MOTOR_BUSQUEDA = null;
 let CARGA_COMPLETA = false;
 
 /* =====================================================
-   ACCESOS RÁPIDOS
+   ACCESOS RÁPIDOS (Vinculados directo a IDs del JSON)
    ===================================================== */
 const ACCESOS_RAPIDOS = [
-  { tag: '01', texto: 'Modalidad y Encuentros por Zoom', consulta: 'horarios de clases virtuales y link de zoom' },
-  { tag: '02', texto: 'Evaluación y Aprobación Directa', consulta: 'como se evalua evaluacion por proceso y aprobacion directa promocion' },
-  { tag: '03', texto: 'Trabajo Práctico Integrador (TPI)', consulta: 'trabajo practico integrador tpi grupos requisitos de entrega' },
-  { tag: '04', texto: 'Fechas de Evaluaciones y Recuperatorios', consulta: 'fechas de actividades evaluativas y recuperatorios cronograma' },
-  { tag: '05', texto: 'Plantel Docente y Contacto', consulta: 'profesores jtp ayudantes correos de contacto' }
+  { tag: '01', texto: 'Encuentros en Vivo y Zoom', targetId: 'enlace_zoom' },
+  { tag: '02', texto: 'Régimen de Aprobación Directa', targetId: 'aprobacion_directa' },
+  { tag: '03', texto: 'Fechas de Evaluaciones y Recuperatorios', targetId: 'fechas_actividades_etapa1' },
+  { tag: '04', texto: 'Pautas, Grupos e Inicio del TPI', targetId: 'tpi_consigna_grupos' },
+  { tag: '05', texto: 'Defensas del TPI (Noviembre)', targetId: 'fechas_defensas_tpi' },
+  { tag: '06', texto: 'Plantel Docente y Contactos', targetId: 'docentes_equipo' }
 ];
 
 /* =====================================================
@@ -435,7 +437,6 @@ function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// Convierte saltos de línea y enlaces a HTML interactivo
 function formatearRespuesta(texto){
   const textoConLinks = texto.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
   return textoConLinks
@@ -452,7 +453,6 @@ let vozSeleccionada = null;
 function cargarVoces(){
   if (!('speechSynthesis' in window)) return;
   const voces = window.speechSynthesis.getVoices();
-  // Busca voz en español (Argentina, regional o genérica)
   vozSeleccionada = voces.find(v => v.lang === 'es-AR') ||
                     voces.find(v => v.lang.startsWith('es-419')) ||
                     voces.find(v => v.lang.startsWith('es-')) ||
@@ -482,17 +482,14 @@ function reproducirVoz(textoPlano, boton){
     return;
   }
 
-  // Si ya estaba hablando este mismo botón, lo pausa
   if (boton.classList.contains('speaking')){
     detenerLectura();
     return;
   }
 
-  // Detiene cualquier lectura previa
   detenerLectura();
 
-  // Limpia URLs para que la voz no deletree enlaces largos
-  const textoLimpio = textoPlano.replace(/https?:\/\/[^\s]+/g, 'el enlace adjunto');
+  const textoLimpio = textoPlano.replace(/https?:\/\/[^\s]+/g, 'el enlace de zoom');
 
   const utterance = new SpeechSynthesisUtterance(textoLimpio);
   utterance.lang = 'es-AR';
@@ -529,7 +526,6 @@ function agregarMensaje(rol, textoPlano){
   bubble.className = 'bubble';
   bubble.innerHTML = formatearRespuesta(textoPlano);
 
-  // Agregar botón de voz si es respuesta del bot
   if (rol === 'bot'){
     const footer = document.createElement('div');
     footer.className = 'bot-footer';
@@ -574,7 +570,7 @@ function renderMenu(){
     btn.className = 'qbtn';
     btn.type = 'button';
     btn.innerHTML = `<span class="tag">${item.tag}</span><span>${item.texto}</span>`;
-    btn.addEventListener('click', () => manejarConsulta(item.texto, item.consulta));
+    btn.addEventListener('click', () => manejarConsultaPorId(item.texto, item.targetId));
     quickmenu.appendChild(btn);
   });
 }
@@ -598,16 +594,17 @@ async function inicializarBase(){
 
     BASE_CONOCIMIENTO = await resp.json();
 
-    // Configuración calibrada de Fuse.js
     const opcionesFuse = {
       includeScore: true,
-      threshold: 0.45, // Tolerancia a errores de tipeo
+      threshold: 0.52,          // Ajustado para admitir preguntas largas y variadas
       ignoreLocation: true,
+      findAllMatches: true,
+      minMatchCharLength: 3,
       keys: [
-        { name: 'keywords', weight: 0.5 },
-        { name: 'preguntas_ejemplo', weight: 0.3 },
-        { name: 'tema', weight: 0.1 },
-        { name: 'respuesta', weight: 0.1 }
+        { name: 'keywords', weight: 0.55 },
+        { name: 'preguntas_ejemplo', weight: 0.30 },
+        { name: 'tema', weight: 0.10 },
+        { name: 'respuesta', weight: 0.05 }
       ]
     };
 
@@ -615,12 +612,12 @@ async function inicializarBase(){
     CARGA_COMPLETA = true;
 
     actualizarEstado('Base de conocimiento lista', 'ready');
-    agregarMensaje('bot', '¡Hola! Soy ProgIA, el asistente virtual de la cátedra Programación 1 🧑‍💻 Podés hacerme consultas sobre horarios, el TPI, las defensas o elegir un acceso rápido.');
+    agregarMensaje('bot', '¡Hola! Soy ProgIA, el asistente virtual de Programación 1 🧑‍💻 Preguntame sobre horarios, evaluaciones por proceso, el TPI, las defensas o hacé clic en los accesos rápidos.');
 
   } catch (error){
-    console.error("ProgIA - Error cargando el JSON:", error);
+    console.error("ProgIA - Error cargando JSON:", error);
     actualizarEstado('Error al cargar la base', 'error');
-    agregarMensaje('bot', 'Hubo un inconveniente al cargar el archivo de preguntas (`base_conocimiento.json`). Verificá que se encuentre en la misma carpeta que el index.html en el repositorio.');
+    agregarMensaje('bot', 'Hubo un inconveniente al cargar `base_conocimiento.json`. Si estás probando localmente, recordá abrir el proyecto usando Live Server o un servidor local.');
   }
 }
 
@@ -630,23 +627,27 @@ async function inicializarBase(){
 function consultarBase(consulta){
   if (!MOTOR_BUSQUEDA) return null;
 
-  const resultados = MOTOR_BUSQUEDA.search(consulta);
+  const queryLimpia = consulta
+    .replace(/[¿?¡!.,;:()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  // Si encontró coincidencias válidas con score confiable
-  if (resultados.length > 0 && resultados[0].score <= 0.48){
+  const resultados = MOTOR_BUSQUEDA.search(queryLimpia);
+
+  if (resultados.length > 0 && resultados[0].score <= 0.52){
     return resultados[0].item.respuesta;
   }
   return null;
 }
 
-function manejarConsulta(textoVisible, consultaInterna){
+function manejarConsulta(textoVisible){
   agregarMensaje('user', textoVisible);
   userInput.value = '';
   ajustarAltoTextarea();
 
   if (!CARGA_COMPLETA){
     setTimeout(() => {
-      agregarMensaje('bot', 'Todavía estoy terminando de cargar la información. Probá nuevamente en un instante.');
+      agregarMensaje('bot', 'Todavía estoy cargando la base de conocimiento. Probá de nuevo en un segundo.');
     }, 200);
     return;
   }
@@ -656,15 +657,32 @@ function manejarConsulta(textoVisible, consultaInterna){
   setTimeout(() => {
     quitarEscribiendo();
 
-    const query = consultaInterna || textoVisible;
-    const respuesta = consultarBase(query);
+    const respuesta = consultarBase(textoVisible);
 
     if (respuesta){
       agregarMensaje('bot', respuesta);
     } else {
-      agregarMensaje('bot', 'No encontré información exacta sobre esa consulta en las pautas oficiales de la materia. Te recomiendo consultar en el foro del campus virtual o escribir al correo del equipo docente.');
+      agregarMensaje('bot', 'No encontré información exacta sobre esa consulta en las pautas oficiales de la materia. Te sugiero consultar en el foro de dudas del campus virtual o escribir al correo de la cátedra.');
     }
   }, 350 + Math.random() * 200);
+}
+
+function manejarConsultaPorId(textoBoton, targetId){
+  agregarMensaje('user', textoBoton);
+  userInput.value = '';
+  ajustarAltoTextarea();
+
+  mostrarEscribiendo();
+
+  setTimeout(() => {
+    quitarEscribiendo();
+    const item = BASE_CONOCIMIENTO.find(i => i.id === targetId);
+    if (item) {
+      agregarMensaje('bot', item.respuesta);
+    } else {
+      agregarMensaje('bot', 'No pude encontrar la sección solicitada en la base.');
+    }
+  }, 250);
 }
 
 /* =====================================================
@@ -689,7 +707,7 @@ sendBtn.addEventListener('click', enviarDesdeInput);
 function enviarDesdeInput(){
   const texto = userInput.value.trim();
   if (!texto) return;
-  manejarConsulta(texto, texto);
+  manejarConsulta(texto);
 }
 
 /* =====================================================
