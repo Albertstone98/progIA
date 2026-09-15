@@ -414,5 +414,19 @@
       "comunicacion efectiva", "representacion de datos", "estructuras de control", "habilidades"
     ],
     "respuesta": "El objetivo general es formar programadores capaces de pensar de manera lógica, diseñar soluciones eficientes en C++, comunicarlas mediante diagramas de flujo y fortalecer el trabajo colaborativo. Los objetivos específicos incluyen dominar la representación de datos, desarrollar pensamiento algorítmico, controlar el flujo del programa (estructuras secuenciales, selectivas y repetitivas) y explicar con claridad las soluciones implementadas."
+  },
+  {
+    "id": "baja_cursada",
+    "tema": "Trámites y Administrativas",
+    "preguntas_ejemplo": [
+      "¿Cómo me doy de baja de la materia?",
+      "¿Qué pasa si tengo que abandonar la cursada?",
+      "¿A dónde debo avisar si dejo de cursar?"
+    ],
+    "keywords": [
+      "baja", "abandono", "baja de cursada", "dejar la materia", "dejar de cursar", 
+      "retirarse", "inscribirme de baja", "tsp@red.frgp.utn.edu.ar"
+    ],
+    "respuesta": "Si necesitás dar de baja la cursada o abandonar la materia por algún motivo, recordá que además de dejar de participar en el aula virtual debés dar aviso formal enviando un correo electrónico a la casilla de la Tecnicatura: tsp@red.frgp.utn.edu.ar."
   }
 ]
